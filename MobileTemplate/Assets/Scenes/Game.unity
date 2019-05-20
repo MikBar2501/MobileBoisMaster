@@ -7163,7 +7163,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -624, y: 0}
+  m_AnchoredPosition: {x: -705, y: 0}
   m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!50 &1162681708
@@ -7223,7 +7223,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 40, y: 500}
+  m_Size: {x: 500, y: 1000}
   m_EdgeRadius: 0
 --- !u!114 &1162681711
 MonoBehaviour:
@@ -8063,7 +8063,7 @@ MonoBehaviour:
     type: 3}
   cavePartSprites:
   - {fileID: 21300000, guid: 80a134095d9e594408516c18b3708c96, type: 3}
-  xStep: 50
+  xStep: 65
   curretY: 0
   sizeStep: 1
   currentSize: 0

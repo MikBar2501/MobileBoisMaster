@@ -106,7 +106,7 @@ public class CaveGenerator : MonoBehaviour
 
             //print(transform.position);
 
-            if (ToScreen(transform.position).x < gate)
+            if (transform.childCount < 50)
             {
                 Step(currentSize);
                 gate -= 0.4f;
