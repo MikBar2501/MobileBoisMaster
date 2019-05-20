@@ -13,6 +13,8 @@ public class BackToMenu : MonoBehaviour
 	public GameObject text;
 	public GameObject panel;
 
+    int targetLevel;
+
     // Start is called before the first frame update
     void Start() {
 		panel.SetActive(false);

@@ -6,6 +6,8 @@ using TMPro;
 
 public class PlayerAccel : MonoBehaviour
 {
+    public static PlayerAccel main;
+
     public float smoothing = 0.8f;
     public float velocity = 5;
     private Vector3 currentAcceleration, initialAcceleration;
@@ -17,8 +19,24 @@ public class PlayerAccel : MonoBehaviour
     public GameObject loseText;
     public static GameObject staticLoseText;
 
+    public void Save(PlayerData data)
+    {
+        data.points = points;
+    }
+
+    public void Load(PlayerData data)
+    {
+        if (data != null)
+            points = data.points;
+        else
+            points = 0;
+
+        DisplayPoints(points);
+    }
+
     void Awake()
     {
+        main = this;
         staticLoseText = loseText;
     }
 
@@ -28,7 +46,7 @@ public class PlayerAccel : MonoBehaviour
         currentAcceleration = Vector3.zero;
         rb = GetComponent<Rigidbody2D>();
         lose = false;
-        points = 0;
+        //points = 0;
         loseText.SetActive(false);
         rb.gravityScale = 0;
         StartCoroutine(AddPoints());
@@ -47,9 +65,14 @@ public class PlayerAccel : MonoBehaviour
     IEnumerator AddPoints() {
         while(!lose) {
             points += 1;
-            pointsTekst.text = "Points: " + points;
+            DisplayPoints(points);
             yield return new WaitForSeconds(1);
         }
+    }
+
+    void DisplayPoints(int points)
+    {
+        pointsTekst.text = "Points: " + points;
     }
 
     public static void Death() {
@@ -57,6 +80,7 @@ public class PlayerAccel : MonoBehaviour
         staticLoseText.SetActive(true);
         rb.gravityScale = 1;
         PlayServices.AddScoreToLeaderboard(GPGSIds.leaderboard_high_score__highest, points);
+        SaveingManager.main.DeleteData();
     }
 
     void OnCollisionEnter2D(Collision2D col)

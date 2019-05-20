@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class CaveGenerator : MonoBehaviour
 {
+    public static CaveGenerator main;
+
     public float moveSpeed = 1;
 
     float currentGate = 1;
@@ -71,6 +73,11 @@ public class CaveGenerator : MonoBehaviour
         currentX += xStep;
     }
 
+    void Awake()
+    {
+        main = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -102,7 +109,7 @@ public class CaveGenerator : MonoBehaviour
             if (ToScreen(transform.position).x < gate)
             {
                 Step(currentSize);
-                gate -= 1;
+                gate -= 0.4f;
 
                 if (currentSize > minSize) 
                     currentSize -= sizeStep;
@@ -113,5 +120,21 @@ public class CaveGenerator : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public void Save(PlayerData data)
+    {
+        data.size = currentSize;
+    }
+
+    public void Load(PlayerData data)
+    {
+        if (data != null)
+            currentSize = data.size;
+        else
+            currentSize = 0;
+
+        if (currentSize == 0)
+            currentSize = Screen.height / 2;
     }
 }
